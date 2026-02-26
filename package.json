@@ -13,7 +13,7 @@
     "test:e2e": "playwright test",
     "lint": "eslint src tests",
     "ci": "npm run typecheck && npm run lint && npm test && npm run build:release",
-    "package:zip": "npm run build:release && rm -f release/slopblock-extension.zip && cd dist && zip -r ../release/slopblock-extension.zip ."
+    "package:zip": "npm run build:release && mkdir -p release && rm -f release/slopblock-extension.zip && cd dist && zip -r ../release/slopblock-extension.zip ."
   },
   "keywords": [],
   "author": "",
