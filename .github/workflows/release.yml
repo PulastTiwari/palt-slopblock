@@ -36,12 +36,18 @@ jobs:
           files: release/slopblock-extension.zip
           generate_release_notes: true
           body: |
-            ## Installation
+            ## Install in 4 steps — no terminal, no coding
 
-            1. Download **slopblock-extension.zip** below.
-            2. Extract the ZIP.
-            3. Open Chrome → `chrome://extensions/` → enable **Developer mode**.
+            1. Download **slopblock-extension.zip** from the Assets section below.
+            2. Extract the ZIP to a folder anywhere on your computer.
+            3. Open Chrome and go to `chrome://extensions/` — enable **Developer mode** (top-right toggle).
             4. Click **Load unpacked** and select the extracted folder.
-            5. Navigate to `https://www.linkedin.com/feed/`
 
-            Full instructions: see [README](https://github.com/${{ github.repository }}#installation)
+            Visit [linkedin.com/feed](https://www.linkedin.com/feed/) — Slopblock activates automatically.
+
+            ---
+
+            **Updating from an older version?**
+            Download the new ZIP, extract it (replace the old folder), then click the **↺ refresh** icon on the Slopblock card in `chrome://extensions/`.
+
+            Full documentation: [README](https://github.com/${{ github.repository }}#readme)

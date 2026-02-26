@@ -4,6 +4,37 @@ See more signal, less noise on LinkedIn. Slopblock is a Chrome extension that au
 
 ---
 
+## Installation
+
+### Step 1 — Download the prebuilt release
+
+Go to the **[Releases page](https://github.com/PulastTiwari/palt-slopblock/releases)** and download **slopblock-extension.zip** from the latest release.
+
+### Step 2 — Extract the ZIP
+
+Unzip the downloaded file. You will get a folder named `slopblock-extension` (or similar).
+
+### Step 3 — Load into Chrome
+
+1. Open Chrome and navigate to `chrome://extensions/`
+2. Enable **Developer mode** using the toggle in the top-right corner.
+3. Click **Load unpacked**.
+4. Select the folder you just extracted.
+
+### Step 4 — Done
+
+Visit [linkedin.com/feed](https://www.linkedin.com/feed/) — Slopblock activates automatically.
+
+---
+
+## Updating to a new version
+
+1. Download the new ZIP from the [Releases page](https://github.com/PulastTiwari/palt-slopblock/releases).
+2. Extract it, replacing the old folder.
+3. Go to `chrome://extensions/` and click the **↺ refresh** icon on the Slopblock card.
+
+---
+
 ## What it does
 
 Slopblock scores every post in your LinkedIn home feed against a set of configurable signals (emoji density, short-line stacking, CTA endings, hashtag overuse, etc.). Posts that exceed your chosen threshold are silently collapsed with a small banner. You stay in control — you can always reveal a post with a single click.
@@ -21,46 +52,6 @@ Slopblock scores every post in your LinkedIn home feed against a set of configur
 - Enable/disable individual signals and tune their weights
 - Edit custom phrase and regex pattern lists
 - Whitelist specific authors by profile path
-
----
-
-## Installation
-
-> **Requirements:** Google Chrome (or any Chromium browser) and [Node.js](https://nodejs.org) (v18+).
-
-### Option A — Download ZIP (no Git required)
-
-1. Click **Code → Download ZIP** on this page and extract the archive.
-2. Open a terminal in the extracted folder and run:
-   ```bash
-   npm install
-   npm run build
-   ```
-3. Open Chrome and go to `chrome://extensions/`.
-4. Enable **Developer mode** (toggle in the top-right corner).
-5. Click **Load unpacked** and select the `dist` folder inside the extracted project.
-6. Navigate to `https://www.linkedin.com/feed/` — Slopblock activates automatically.
-
-### Option B — Clone the repository
-
-```bash
-git clone https://github.com/PulastTiwari/palt-slopblock.git
-cd palt-slopblock
-npm install
-npm run build
-```
-
-Then follow steps 3–6 above.
-
-### Updating
-
-After pulling new changes or extracting a new ZIP:
-
-```bash
-npm run build
-```
-
-Then click the **↺ refresh** icon on the Slopblock card in `chrome://extensions/`.
 
 ---
 
@@ -94,7 +85,18 @@ All filtering is done locally. No data leaves your browser. See [PRIVACY.md](PRI
 
 ---
 
-## Development
+## For developers
+
+> Everything below is for contributors building from source. Regular users do not need any of this.
+
+**Requirements:** Node.js v18+ and npm.
+
+```bash
+git clone https://github.com/PulastTiwari/palt-slopblock.git
+cd palt-slopblock
+npm install
+npm run build        # produces the dist/ folder
+```
 
 ```bash
 npm run dev          # watch build
@@ -105,7 +107,7 @@ npm run ci           # full local CI (typecheck + lint + test + build)
 npm run package:zip  # build and package → release/slopblock-extension.zip
 ```
 
-Releasing a new version — push a version tag and GitHub Actions builds and attaches the ZIP automatically:
+**Cutting a release** — push a version tag and GitHub Actions builds and attaches the prebuilt ZIP to the release automatically:
 
 ```bash
 git tag v0.2.0
