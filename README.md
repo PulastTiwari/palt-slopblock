@@ -2,8 +2,6 @@
 
 See more signal, less noise on LinkedIn. Slopblock is a Chrome extension that automatically collapses engagement-bait posts in your LinkedIn feed using local, deterministic rules — no AI, no servers, no tracking.
 
-![Demo](assets/demo.gif)
-
 ---
 
 ## What it does
@@ -23,14 +21,6 @@ Slopblock scores every post in your LinkedIn home feed against a set of configur
 - Enable/disable individual signals and tune their weights
 - Edit custom phrase and regex pattern lists
 - Whitelist specific authors by profile path
-
----
-
-## Screenshots
-
-| Feed | Popup | Options |
-|------|-------|---------|
-| ![Feed collapsed](assets/feed-collapsed.png) | ![Popup](assets/popup-page.png) | ![Options](assets/options-page.png) |
 
 ---
 
