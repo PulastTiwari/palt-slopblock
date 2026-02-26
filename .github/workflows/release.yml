@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build extension
+        run: npm run build:release
+
+      - name: Package ZIP
+        run: npm run package:zip
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release/slopblock-extension.zip
+          generate_release_notes: true
+          body: |
+            ## Installation
+
+            1. Download **slopblock-extension.zip** below.
+            2. Extract the ZIP.
+            3. Open Chrome → `chrome://extensions/` → enable **Developer mode**.
+            4. Click **Load unpacked** and select the extracted folder.
+            5. Navigate to `https://www.linkedin.com/feed/`
+
+            Full instructions: see [README](https://github.com/${{ github.repository }}#installation)

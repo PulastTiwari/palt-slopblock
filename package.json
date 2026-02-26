@@ -1,0 +1,35 @@
+{
+  "name": "slopblock",
+  "version": "1.0.0",
+  "description": "Local-only deterministic LinkedIn engagement-style post filter extension",
+  "scripts": {
+    "build": "vite build && cp manifest.json dist/manifest.json && npm run build:ext-scripts",
+    "build:ext-scripts": "esbuild src/content/content.ts --bundle --format=iife --platform=browser --target=chrome114 --outfile=dist/content/content.js && esbuild src/background/serviceWorker.ts --bundle --format=iife --platform=browser --target=chrome114 --outfile=dist/background/serviceWorker.js",
+    "build:release": "npm run build",
+    "dev": "vite build --watch",
+    "preview:e2e": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
+    "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "test:e2e": "playwright test",
+    "lint": "eslint src tests",
+    "ci": "npm run typecheck && npm run lint && npm test && npm run build:release",
+    "package:zip": "npm run build:release && rm -f release/slopblock-extension.zip && cd dist && zip -r ../release/slopblock-extension.zip ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/chrome": "^0.1.37",
+    "@types/jest": "^30.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
+    "esbuild": "^0.27.3",
+    "eslint": "^10.0.2",
+    "jest": "^30.2.0",
+    "prettier": "^3.8.1",
+    "ts-jest": "^29.4.6",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
+  }
+}

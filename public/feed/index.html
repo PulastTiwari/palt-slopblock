@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feed Snapshot Harness</title>
+  </head>
+  <body>
+    <main role="main">
+      <div class="scaffold-finite-scroll__content" id="feedRoot">
+        <div class="feed-shared-update-v2" data-urn="urn:li:activity:1">
+          <a href="https://www.linkedin.com/in/engagement-author/">Author</a>
+          <div class="update-components-text">🚀 🚀 🚀 Stop scrolling Here's what I learned #ai #hiring #product #growth #career Follow me for more What do you think?</div>
+        </div>
+
+        <div class="feed-shared-update-v2" data-urn="urn:li:activity:2">
+          <a href="https://www.linkedin.com/in/engineering-lead/">Engineer</a>
+          <div class="update-components-text">Shipped retry policy fix. API error rate dropped 23% week-over-week.</div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      (() => {
+        const listeners = [];
+        const state = {
+          settings: {
+            threshold: 10,
+            weights: {
+              emojiDensity: 2,
+              emojiBullets: 2,
+              inlinePhrase: 2,
+              ctaEnding: 3,
+              excessLineBreaks: 2,
+              emDashOveruse: 1,
+              hashtagOveruse: 2,
+              shortLineStacking: 3,
+              technicalTokens: -3,
+              longParagraph: -2,
+              noCtaNoStacking: -2
+            },
+            filters: {
+              emojiDensity: true,
+              emojiBullets: true,
+              inlinePhrase: true,
+              ctaEnding: true,
+              excessLineBreaks: true,
+              emDashOveruse: true,
+              hashtagOveruse: true,
+              shortLineStacking: true,
+              technicalTokens: true,
+              longParagraph: true,
+              noCtaNoStacking: true
+            },
+            phraseList: ["here's what i learned", 'stop scrolling'],
+            regexList: ['follow.*for', 'what do you think'],
+            whitelistAuthors: [],
+            lastActions: []
+          }
+        };
+
+        window.chrome = {
+          storage: {
+            local: {
+              async get(key) {
+                if (typeof key === 'string') {
+                  return { [key]: state[key] };
+                }
+                return state;
+              },
+              async set(patch) {
+                Object.assign(state, patch);
+                for (const listener of listeners) {
+                  const changes = {};
+                  for (const [k, v] of Object.entries(patch)) {
+                    changes[k] = { oldValue: undefined, newValue: v };
+                  }
+                  listener(changes, 'local');
+                }
+              }
+            },
+            onChanged: {
+              addListener(listener) {
+                listeners.push(listener);
+              }
+            }
+          },
+          runtime: {
+            onInstalled: { addListener() {} },
+            openOptionsPage() {}
+          }
+        };
+      })();
+    </script>
+
+    <script type="module" src="/content/content.js"></script>
+  </body>
+</html>

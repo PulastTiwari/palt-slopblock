@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slopblock Settings</title>
+    <style>
+      body { font-family: Arial, sans-serif; max-width: 720px; margin: 24px auto; padding: 0 16px; }
+      h1 { margin-bottom: 16px; }
+      section { margin-bottom: 20px; }
+      textarea, input[type='number'] { width: 100%; box-sizing: border-box; padding: 8px; }
+      textarea { min-height: 120px; font-family: monospace; }
+      button { padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e1; background: #fff; cursor: pointer; }
+      .help { color: #475569; font-size: 13px; }
+      .grid { display: grid; grid-template-columns: 1fr 120px 120px; gap: 8px; align-items: center; }
+      .head { font-weight: 700; }
+      .rule-label { font-size: 14px; }
+      input[type='checkbox'] { transform: scale(1.1); }
+    </style>
+  </head>
+  <body>
+    <h1>Slopblock</h1>
+
+    <section>
+      <label for="threshold">Threshold</label>
+      <input id="threshold" type="number" min="1" max="30" />
+      <div class="help">Posts scoring at or above this threshold will be collapsed.</div>
+    </section>
+
+    <section>
+      <h2>Signals</h2>
+      <div class="grid head">
+        <div>Rule</div>
+        <div>Enabled</div>
+        <div>Weight</div>
+      </div>
+      <div class="grid">
+        <label class="rule-label" for="filter-emojiDensity">Emoji density</label>
+        <input id="filter-emojiDensity" type="checkbox" />
+        <input id="weight-emojiDensity" type="number" min="-10" max="10" />
+
+        <label class="rule-label" for="filter-emojiBullets">Emoji/bullet lines</label>
+        <input id="filter-emojiBullets" type="checkbox" />
+        <input id="weight-emojiBullets" type="number" min="-10" max="10" />
+
+        <label class="rule-label" for="filter-inlinePhrase">Inline phrase matches</label>
+        <input id="filter-inlinePhrase" type="checkbox" />
+        <input id="weight-inlinePhrase" type="number" min="-10" max="10" />
+
+        <label class="rule-label" for="filter-ctaEnding">CTA ending</label>
+        <input id="filter-ctaEnding" type="checkbox" />
+        <input id="weight-ctaEnding" type="number" min="-10" max="10" />
+
+        <label class="rule-label" for="filter-excessLineBreaks">Excess line breaks</label>
+        <input id="filter-excessLineBreaks" type="checkbox" />
+        <input id="weight-excessLineBreaks" type="number" min="-10" max="10" />
+
+        <label class="rule-label" for="filter-emDashOveruse">Em-dash overuse</label>
+        <input id="filter-emDashOveruse" type="checkbox" />
+        <input id="weight-emDashOveruse" type="number" min="-10" max="10" />
+
+        <label class="rule-label" for="filter-hashtagOveruse">Hashtag overuse (#)</label>
+        <input id="filter-hashtagOveruse" type="checkbox" />
+        <input id="weight-hashtagOveruse" type="number" min="-10" max="10" />
+
+        <label class="rule-label" for="filter-shortLineStacking">Short-line stacking</label>
+        <input id="filter-shortLineStacking" type="checkbox" />
+        <input id="weight-shortLineStacking" type="number" min="-10" max="10" />
+
+        <label class="rule-label" for="filter-technicalTokens">Technical-token penalty</label>
+        <input id="filter-technicalTokens" type="checkbox" />
+        <input id="weight-technicalTokens" type="number" min="-10" max="10" />
+
+        <label class="rule-label" for="filter-longParagraph">Long-paragraph penalty</label>
+        <input id="filter-longParagraph" type="checkbox" />
+        <input id="weight-longParagraph" type="number" min="-10" max="10" />
+
+        <label class="rule-label" for="filter-noCtaNoStacking">No-CTA/no-stack penalty</label>
+        <input id="filter-noCtaNoStacking" type="checkbox" />
+        <input id="weight-noCtaNoStacking" type="number" min="-10" max="10" />
+      </div>
+      <div class="help">Toggle signals and adjust weight contributions used in scoring.</div>
+    </section>
+
+    <section>
+      <label for="phrases">Phrase list (one per line)</label>
+      <textarea id="phrases"></textarea>
+    </section>
+
+    <section>
+      <label for="regex">Regex patterns (one per line, case-insensitive)</label>
+      <textarea id="regex"></textarea>
+    </section>
+
+    <section>
+      <label for="whitelist">Whitelisted authors (one path per line, e.g. /in/name)</label>
+      <textarea id="whitelist"></textarea>
+    </section>
+
+    <button id="saveBtn" type="button">Save & apply</button>
+    <span id="status" class="help"></span>
+
+    <script type="module" src="./options.ts"></script>
+  </body>
+</html>

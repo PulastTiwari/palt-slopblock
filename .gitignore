@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Packaged release artifact
+release/*.zip
+
+# Test artifacts
+test-results/
+playwright-report/
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Editor
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Internal docs (local only)
+project-requirement-document.md
